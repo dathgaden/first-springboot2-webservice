@@ -14,6 +14,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class PostsRepositoryTest {
+
     @Autowired
     PostsRepository postsRepository;
 
@@ -23,18 +24,21 @@ public class PostsRepositoryTest {
     }
 
     @Test
-    public void postsTest() {
+    public void postsReadTest() {
+        //given
         String title = "테스트 게시글";
         String content = "테스트 본문";
 
         postsRepository.save(Posts.builder()
                 .title(title)
                 .content(content)
-                .author("kswon12@naver.com")
+                .author("jojoldu@gmail.com")
                 .build());
 
+        //when
         List<Posts> postsList = postsRepository.findAll();
 
+        //then
         Posts posts = postsList.get(0);
         assertThat(posts.getTitle()).isEqualTo(title);
         assertThat(posts.getContent()).isEqualTo(content);
